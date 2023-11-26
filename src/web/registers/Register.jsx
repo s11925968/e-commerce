@@ -3,6 +3,7 @@ import Inputs from '../../shared/Inputs';
 import { useFormik } from 'formik';
 import {registerSchema} from '../../shared/Validate.jsx'
 import axios from 'axios';
+import { toast } from 'react-toastify';
 export default function Register() {
 
   const initialValues={
@@ -18,7 +19,19 @@ export default function Register() {
     formData.append("password",users.password);
     formData.append("image",users.image);
     const {data}=await axios.post("https://ecommerce-node4.vercel.app/auth/signup",formData);
-    
+    if(data.message=="success"){
+      formik.resetForm();
+      toast.success('account created succesfully,please verify your email to login', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }
   }
   const formik=useFormik({
     initialValues,
@@ -75,14 +88,16 @@ export default function Register() {
 
   )
   return (
-    <div className="container">
-      <h2>create account</h2>
+    <div className="container d-flex justify-content-center align-items-center vh-100">
+      <div>
+      <h2 className='text-center'>create account</h2>
       <form onSubmit={formik.handleSubmit} enctype="multipart/form-data">
         {renderInput}
-        <button type="submit" disabled={!formik.isValid}>
+        <button type="submit" disabled={!formik.isValid} className='w-100'>
           Submit
         </button>
       </form>
+      </div>
     </div>
   );
 }

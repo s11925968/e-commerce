@@ -1,7 +1,13 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar({users,setUser}) {
+  const navigate=useNavigate();
+  const logout=()=>{
+    localStorage.removeItem("userToken");
+    setUser(null);
+    navigate('/home');
+  }
   return (
     <div>
       {" "}
@@ -40,6 +46,13 @@ export default function Navbar() {
                   Products
                 </a>
               </li>
+              {users &&<li className="nav-item">
+                <a className="nav-link" href="#">
+                  cart
+                </a>
+              </li>
+              }
+              
             </ul>
             <ul className="navbar-nav">
               <li className="nav-item dropdown">
@@ -51,9 +64,11 @@ export default function Navbar() {
                   aria-expanded="false"
                 >
                   Dropdown
-                </a>
+                </a>                
                 <ul className="dropdown-menu ">
-                  <li>
+                  {!users?
+                  <>
+                    <li>
                     <Link className="dropdown-item" to="/register">
                       register
                     </Link>
@@ -62,11 +77,30 @@ export default function Navbar() {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="/login">
                       login
-                    </a>
+                    </Link>
                   </li>
+                  </>
+                  :
+                  <>
+                    <li>
+                    <Link className="dropdown-item" to="/register">
+                      profile
+                    </Link>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" onClick={logout}>
+                      logout
+                    </Link>
+                  </li>
+                  </>
+                  }
                 </ul>
+                
               </li>
             </ul>
           </div>
