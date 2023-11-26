@@ -5,7 +5,7 @@ import Login from "./web/login/Login.jsx";
 import Home from "./web/Home/Home.jsx";
 import Categories from "./web/categories/Categories.jsx";
 import DashboardLayout from "./layouts/Layoutdashbord.jsx";
-import HomeDashboard from "./dashboard/home/Home.jsx";
+import HomeDashboard from "./dashboard/Home/Home.jsx";
 import CategoriesDashboard from "./dashboard/categories/Categories.jsx";
 import { createBrowserRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
