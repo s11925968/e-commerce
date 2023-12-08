@@ -51,7 +51,6 @@ export default function Sendcode() {
         {renderInput}
         <button type="submit" className='w-100'>
           Send Code
-
         </button>
       </form>
       </div>

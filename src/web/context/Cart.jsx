@@ -40,22 +40,22 @@ export function CartConterxtProvider({children}){
     }
   }
   const removeCartContext=async (productId)=>{
-    try{
-      const token=localStorage.getItem('userToken');
-      const {data}=await axios.patch(`${import.meta.env.VITE_URL_LINK}/cart/removeItem`,
-      {
-        productId
-      },
-      {
-        headers:{
-          Authorization:`Tariq__${token}`,
-        }
-      });
-      return data;
+    // try{
+    //   const token=localStorage.getItem('userToken');
+    //   const {data}=await axios.patch(`${import.meta.env.VITE_URL_LINK}/cart/removeItem`,
+    //   {
+    //     productId
+    //   },
+    //   {
+    //     headers:{
+    //       Authorization:`Tariq__${token}`,
+    //     }
+    //   });
+    //   return data;
       
-    }catch(error){
-      (error);
-    }
+    // }catch(error){
+    //   (error);
+    // }
   }
   return <CartConterxt.Provider value={{addToCartContext,getCartContext,removeCartContext}}  >
     {children}
