@@ -10,7 +10,6 @@ export default function Sendcode() {
   }
   const onSubmit=async users=>{
     const {data}=await axios.patch(`${import.meta.env.VITE_URL_LINK}/auth/sendcode`,users);
-    console.log(data);
     if(data.message=="success"){
         navigate('/auth/forgotPassword')
     }

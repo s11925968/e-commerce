@@ -14,7 +14,6 @@ export default function Cart() {
   }
   const removeCart=async(productId)=>{
     const res=await removeCartContext(productId);
-    console.log(res);
     return res;
   }
   const {data,isLoading}=useQuery("getCart",getCart);

@@ -9,8 +9,6 @@ import { toast } from 'react-toastify';
 export default function Product() {
   const navaigate=useNavigate();
   const {addToCartContext}=useContext(CartConterxt);
-
- 
   const {_id}=useParams();
   const getProduct=async()=>{
     const {data}=await axios.get(`${import.meta.env.VITE_URL_LINK}/products/${_id}`)

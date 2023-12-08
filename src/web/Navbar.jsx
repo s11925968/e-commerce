@@ -12,7 +12,7 @@ export default function Navbar() {
   const logout=()=>{
     localStorage.removeItem("userToken");
     setUserToken(null);
-    setUserData(null);
+    //setUserData(null);
     navigate('/');
   }
   const {getCartContext}=useContext(CartConterxt);
@@ -80,7 +80,8 @@ export default function Navbar() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {userData!=null?userData.userName:'account'}
+                  {/* {userData!=null?userData.userName:'account'} */}
+                  account
                 </a>                
                 <ul className="dropdown-menu ">
                   {!userToken?
