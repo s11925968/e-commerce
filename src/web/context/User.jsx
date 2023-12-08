@@ -22,7 +22,7 @@ export function UserContextProvider({children}){
         {
           headers: {
             Authorization:
-              `Tariq__${token}`, 
+              `Tariq__${userToken}`, 
           },
         });
         console.log("test");
