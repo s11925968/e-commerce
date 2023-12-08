@@ -1,6 +1,9 @@
 import React, { useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { userContext } from './context/User';
+import Loader from '../shared/Loader';
+import { useQuery } from 'react-query';
+import { CartConterxt } from './context/Cart';
 
 export default function Navbar() {
   let {userToken,setUserToken,userData,setUserData}=useContext(userContext);
@@ -11,6 +14,15 @@ export default function Navbar() {
     setUserToken(null);
     setUserData(null);
     navigate('/');
+  }
+  const {getCartContext}=useContext(CartConterxt);
+  const getCart=async()=>{
+    const res=await getCartContext();
+    return res;
+  }
+  const {data,isLoading}=useQuery("getCart",getCart);
+  if(isLoading){
+    return <Loader />
   }
   return (
     <div>
@@ -52,8 +64,8 @@ export default function Navbar() {
               </li>
               {userToken &&<li className="nav-item">
                 <Link className="nav-link" to="/cart">
-                  cart
-                  
+                  {data.count}
+                  <span className='ps-1'>cart</span>
                 </Link>
               </li>
               }

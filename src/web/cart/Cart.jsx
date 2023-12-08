@@ -4,11 +4,17 @@ import './cart.css'
 import { useContext } from 'react'
 import { CartConterxt } from '../context/Cart'
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom'
 export default function Cart() {
 
-  const {getCartContext}=useContext(CartConterxt);
+  const {getCartContext,removeCartContext}=useContext(CartConterxt);
   const getCart=async()=>{
     const res=await getCartContext();
+    return res;
+  }
+  const removeCart=async(productId)=>{
+    const res=await removeCartContext(productId);
+    console.log(res);
     return res;
   }
   const {data,isLoading}=useQuery("getCart",getCart);
@@ -44,7 +50,7 @@ export default function Cart() {
                 <div className="product-details">
                   <h2>{product.name}</h2>
                   <span>Color:black</span>
-                  <a href="#">
+                  <a href="#" onClick={()=>removeCart(product.details._id)}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width={24}
@@ -81,7 +87,7 @@ export default function Cart() {
                     />
                   </svg>
                 </button>
-                <span>1</span>
+                <span>{product.quantity}</span>
                 <button>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

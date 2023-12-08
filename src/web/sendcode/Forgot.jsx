@@ -27,7 +27,6 @@ export default function Forgot() {
         });
         navigate('/')
     }
-    console.log(data);
   }
   const formik=useFormik({
     initialValues,

@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React from 'react'
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Loader from '../../shared/Loader';
 import { useContext } from 'react';
 import { CartConterxt } from '../context/Cart';
+import { toast } from 'react-toastify';
 export default function Product() {
+  const navaigate=useNavigate();
   const {addToCartContext}=useContext(CartConterxt);
 
  
@@ -20,7 +22,19 @@ export default function Product() {
 
   const addToCart=async(productId)=>{
     const res=await addToCartContext(productId);
-    console.log(res);
+    if(res.message=="success"){
+      toast.success('add success', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        navaigate("/cart")
+    }
   }
   if(isLoading){
     return <Loader />

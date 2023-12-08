@@ -25,7 +25,6 @@ export function UserContextProvider({children}){
                 `Tariq__${token}`, 
             },
           });
-          console.log(data);
           setUserData(data.user);
       }
       catch(error){
