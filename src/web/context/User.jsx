@@ -8,15 +8,14 @@ export function UserContextProvider({children}){
 
 
   const [userToken,setUserToken] = useState(null);
-  const [userData,setUserData]=useState(null);
-
   const saveCurrentUser = () => {
     const token = localStorage.getItem("userToken");
     const decode = jwtDecode(token);
     setUserToken(decode);
   };
+  const [userData,setUserData]=useState(null);
   const getUserData=async()=>{
-    if(userToken){
+      try{
         const token = localStorage.getItem("userToken");
         const { data } = await axios.get(
           `${import.meta.env.VITE_URL_LINK}/user/profile`,
@@ -28,14 +27,21 @@ export function UserContextProvider({children}){
           });
           console.log(data);
           setUserData(data.user);
-    }
+      }
+      catch(error){
+        console.log(error);
+      }
+    
     
   }
   useEffect(()=>{
+    getUserData();
     if(localStorage.getItem("userToken")){
       saveCurrentUser();
-      getUserData();
     }
+  },[])
+  useEffect(()=>{
+    getUserData();
   },[userToken]);
   return <userContext.Provider value={{userToken,setUserToken,userData,setUserData}}>
     {children}

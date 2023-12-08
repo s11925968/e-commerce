@@ -68,7 +68,7 @@ export default function Navbar() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {userData!=null?userData.userName:'Account'}
+                  {userData!=null?userData.userName:'account'}
                 </a>                
                 <ul className="dropdown-menu ">
                   {!userToken?
@@ -90,7 +90,7 @@ export default function Navbar() {
                   :
                   <>
                     <li>
-                    <Link className="dropdown-item" to="/">
+                    <Link className="dropdown-item" to="/profile">
                       profile
                     </Link>
                   </li>

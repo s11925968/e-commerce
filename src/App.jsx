@@ -13,6 +13,9 @@ import Product from "./web/products/Product.jsx";
 import { CartConterxtProvider } from "./web/context/Cart.jsx";
 import Cart from "./web/cart/Cart.jsx";
 import ProductRoute from "./web/prodtuctRoute/ProductRoute.jsx";
+import Profile from "./web/profile/Profile.jsx";
+import Sendcode from "./web/sendcode/Sendcode.jsx";
+import Forgot from "./web/sendcode/Forgot.jsx";
 export default function App() {
   const router = createBrowserRouter([
     {
@@ -38,6 +41,18 @@ export default function App() {
               <Cart />
             </ProductRoute>
           
+        },
+        {
+          path:'profile',
+          element:<Profile />
+        },
+        {
+          path:'auth/sendcode',
+          element:<Sendcode />
+        },
+        {
+          path:'auth/forgotPassword',
+          element:<Forgot />
         },
         {
           path: "categories",
