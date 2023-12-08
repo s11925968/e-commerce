@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { userContext } from './context/User';
 
-export default function Navbar({users,setUser}) {
+export default function Navbar() {
+  let {userToken,setUserToken,userData,setUserData}=useContext(userContext);
+  
   const navigate=useNavigate();
   const logout=()=>{
     localStorage.removeItem("userToken");
-    setUser(null);
-    navigate('/home');
+    setUserToken(null);
+    setUserData(null);
+    navigate('/');
   }
   return (
     <div>
@@ -30,15 +34,15 @@ export default function Navbar({users,setUser}) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav m-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="/">
                   Home
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="/categories">
                   Categories
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item">
@@ -46,10 +50,11 @@ export default function Navbar({users,setUser}) {
                   Products
                 </a>
               </li>
-              {users &&<li className="nav-item">
-                <a className="nav-link" href="#">
+              {userToken &&<li className="nav-item">
+                <Link className="nav-link" to="/cart">
                   cart
-                </a>
+                  
+                </Link>
               </li>
               }
               
@@ -63,10 +68,10 @@ export default function Navbar({users,setUser}) {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Dropdown
+                  {userData!=null?userData.userName:'Account'}
                 </a>                
                 <ul className="dropdown-menu ">
-                  {!users?
+                  {!userToken?
                   <>
                     <li>
                     <Link className="dropdown-item" to="/register">
@@ -85,7 +90,7 @@ export default function Navbar({users,setUser}) {
                   :
                   <>
                     <li>
-                    <Link className="dropdown-item" to="/register">
+                    <Link className="dropdown-item" to="/">
                       profile
                     </Link>
                   </li>

@@ -8,24 +8,16 @@ import DashboardLayout from "./layouts/Layoutdashbord.jsx";
 import HomeDashboard from "./dashboard/Home/Home.jsx";
 import CategoriesDashboard from "./dashboard/categories/Categories.jsx";
 import { createBrowserRouter } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
+import Category from "./web/products/Category.jsx";
+import Product from "./web/products/Product.jsx";
+import { CartConterxtProvider } from "./web/context/Cart.jsx";
+import Cart from "./web/cart/Cart.jsx";
+import ProductRoute from "./web/prodtuctRoute/ProductRoute.jsx";
 export default function App() {
-  const [users, setUser] = useState(null);
-  const saveCurrentUser = () => {
-    const token = localStorage.getItem("userToken");
-    const decode = jwtDecode(token);
-    setUser(decode);
-  };
-  useEffect(()=>{
-    if(localStorage.getItem("userToken")){
-      saveCurrentUser();
-    }
-  },[])
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout users={users} setUser={setUser}/>,
+      element: <Layout />,
       children: [
         {
           path: "register",
@@ -33,15 +25,31 @@ export default function App() {
         },
         {
           path: "login",
-          element: <Login saveCurrentUser={saveCurrentUser} />,
+          element: <Login />,
         },
         {
-          path: "home",
+          path: "/",
           element: <Home />,
+        },
+        {
+          path: "cart",
+          element: 
+            <ProductRoute>
+              <Cart />
+            </ProductRoute>
+          
         },
         {
           path: "categories",
           element: <Categories />,
+        },
+        {
+          path: "/products/category/:_id",
+          element: <Category />,
+        },
+        {
+          path: "/product/:_id",
+          element: <Product />,
         },
         {
           path: "*",
@@ -68,5 +76,10 @@ export default function App() {
       ],
     },
   ]);
-  return <RouterProvider router={router} />;
+  return (
+    
+      <CartConterxtProvider>
+        <RouterProvider router={router} />;
+      </CartConterxtProvider>
+  );
 }

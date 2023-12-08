@@ -1,0 +1,14 @@
+.Categories img{
+  width: 100px;
+  
+  aspect-ratio:200/287;
+  object-fit: cover;
+  background-color: aliceblue;
+  -webkit-border-radius:100%;
+  -moz-border-radius:100%;
+  -ms-border-radius:100%;
+  -o-border-radius:100%;
+}
+.swiper{
+  padding: 50px;
+}

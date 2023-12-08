@@ -1,0 +1,22 @@
+.footers{
+  background-color: #4b5357;
+}
+.footers .images img{
+  width: 50%;
+}
+.logo{
+  width: 20%!important;
+}
+@media screen and (max-width:600px){
+  :root{
+    font-size: 12px;
+  }
+  .footers .images img{
+    width: 40%;
+    margin-top: 10px !important;
+  }
+  .footers{
+    margin-top: 15px !important;
+  }
+  
+}
