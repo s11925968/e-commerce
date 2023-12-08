@@ -10,6 +10,10 @@ export default function Sendcode() {
   }
   const onSubmit=async users=>{
     const {data}=await axios.patch(`${import.meta.env.VITE_URL_LINK}/auth/sendcode`,users);
+    console.log(data);
+    if(data.message=="success"){
+        navigate('/auth/forgotPassword')
+    }
   }
   const formik=useFormik({
     initialValues,
@@ -49,7 +53,6 @@ export default function Sendcode() {
           Send Code
 
         </button>
-        <Link to="/auth/forgotPassword">Change password</Link>
       </form>
       </div>
     </div>

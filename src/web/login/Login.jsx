@@ -26,7 +26,7 @@ export default function Login() {
       localStorage.setItem("userToken",data.token);
       setUserToken(data.token);
       formik.resetForm();
-      toast.success('account created succesfully,please verify your email to login', {
+      toast.success('login success', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,

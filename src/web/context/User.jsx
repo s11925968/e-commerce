@@ -15,22 +15,20 @@ export function UserContextProvider({children}){
   };
   const [userData,setUserData]=useState(null);
   const getUserData=async()=>{
-      try{
-        const token = localStorage.getItem("userToken");
-        const { data } = await axios.get(
-          `${import.meta.env.VITE_URL_LINK}/user/profile`,
-          {
-            headers: {
-              Authorization:
-                `Tariq__${token}`, 
-            },
-          });
-          setUserData(data.user);
-      }
-      catch(error){
-        console.log(error);
-      }
+    if(userToken){
+      const token=localStorage.getItem('userToken');
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_URL_LINK}/user/profile`,
+        {
+          headers: {
+            Authorization:
+              `Tariq__${token}`, 
+          },
+        });
+        console.log("test");
+        setUserData(data.user);
     
+    }
     
   }
   useEffect(()=>{
